@@ -4,5 +4,5 @@
 .jsonl
 .notebooks/lib/**/*
 __pycache__
-data/
+#data/
 lib/
