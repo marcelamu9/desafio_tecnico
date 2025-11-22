@@ -1,0 +1,94 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="ej1" name="Ejercicio 1 - ML vs LLM">
+    <mxGraphModel dx="827" dy="590" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="#ffffff">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Start -->
+        <mxCell id="start" value="Start" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="80" width="80" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- Ingesta y prep de datos -->
+        <mxCell id="ingesta" value="Cargar precios_historicos.csv\n+ ordenar por ITEM_ID y fecha" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="60" width="210" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="features" value="Features + label heurístico\n(z-score / IQR / medianas)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="60" width="230" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Rama Modelo B clásico -->
+        <mxCell id="modeloB" value="Modelo B clásico\n(Isolation Forest / regla estadística)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="160" y="170" width="230" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="salidaB" value="Predicción B: ANOMALO/NORMAL" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="420" y="170" width="190" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Rama Modelo A LLM -->
+        <mxCell id="prompt" value="Construir prompt JSON\n+ contexto ventana de precios" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="280" width="230" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="modeloA" value="Modelo A LLM\n(label, confidence, reason)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="420" y="280" width="210" height="60" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="salidaA" value="Predicción A: ANOMALO/NORMAL\n+ latencia + costo" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="660" y="280" width="220" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Evaluación y A/B Test -->
+        <mxCell id="eval" value="Evaluación + A/B Test\nF1, Precision, Recall, PR-AUC\nBootstrap ΔF1 (IC95%, p-value)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="660" y="130" width="240" height="90" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="outputs" value="Outputs:\n- tabla métricas A vs B\n- gráficas series 2–3 items\n- conclusión ejecutiva" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="930" y="140" width="210" height="100" as="geometry"/>
+        </mxCell>
+
+        <!-- Conectores principales -->
+        <mxCell id="e1" edge="1" parent="1" source="start" target="ingesta" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="ingesta" target="features" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Rama B -->
+        <mxCell id="e3" edge="1" parent="1" source="features" target="modeloB" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="modeloB" target="salidaB" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Rama A -->
+        <mxCell id="e5" edge="1" parent="1" source="features" target="prompt" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="prompt" target="modeloA" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="modeloA" target="salidaA" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- Hacia evaluación -->
+        <mxCell id="e8" edge="1" parent="1" source="salidaB" target="eval" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="salidaA" target="eval" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="eval" target="outputs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
