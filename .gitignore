@@ -1,0 +1,8 @@
+20250922_Desafio_Tecnico_MercadoLibre.pdf
+.venv
+.env
+.jsonl
+.notebooks/lib/**/*
+__pycache__
+data/
+lib/

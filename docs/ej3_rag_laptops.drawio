@@ -1,0 +1,84 @@
+<mxfile host="app.diagrams.net">
+  <diagram id="ej3" name="Ejercicio 3 - RAG Laptops">
+    <mxGraphModel dx="827" dy="590" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" background="#ffffff">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- Start -->
+        <mxCell id="start" value="Start" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="40" y="80" width="80" height="40" as="geometry"/>
+        </mxCell>
+
+        <!-- Ingesta y normalización -->
+        <mxCell id="ingesta" value="Ingesta laptops CSV\n+ normalización campos" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="60" width="220" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Construcción de documentos y chunks -->
+        <mxCell id="docs" value="Construir documentos por laptop\n+ chunks 50–120 tokens" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="410" y="60" width="240" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Indexación -->
+        <mxCell id="index" value="Indexación\nBM25 o embeddings ligeros" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="700" y="40" width="230" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Retrieve -->
+        <mxCell id="retrieve" value="Retrieve top-k (3–5)\nchunks relevantes" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="170" width="230" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- Generate -->
+        <mxCell id="generate" value="LLM: generar respuesta\n≤120 palabras + citas [laptop_id:campo]" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="430" y="170" width="260" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- Agente crítico -->
+        <mxCell id="agent" value="Agente crítico\nverifica que cada afirmación tenga soporte\n(y rehace si es necesario)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="730" y="170" width="260" height="90" as="geometry"/>
+        </mxCell>
+
+        <!-- Respuesta final -->
+        <mxCell id="respuesta" value="Respuesta final al usuario\n+ log de decisiones del agente" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="180" width="230" height="80" as="geometry"/>
+        </mxCell>
+
+        <!-- MCP opcional -->
+        <mxCell id="mcp" value="MCP opcional\nexponer índice/funciones como servidor" style="rounded=1;whiteSpace=wrap;html=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="700" y="300" width="260" height="70" as="geometry"/>
+        </mxCell>
+
+        <!-- Conectores -->
+        <mxCell id="e1" edge="1" parent="1" source="start" target="ingesta" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="ingesta" target="docs" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="docs" target="index" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e4" edge="1" parent="1" source="index" target="retrieve" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="retrieve" target="generate" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="generate" target="agent" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="agent" target="respuesta" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <mxCell id="e8" edge="1" parent="1" source="index" target="mcp" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

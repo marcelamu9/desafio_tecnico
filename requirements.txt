@@ -1,0 +1,14 @@
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
+networkx
+jupyter
+google-generativeai
+python-dotenv
+# Graph visualization and analysis
+plotly>=5.17.0
+pyvis>=0.3.2
+requests>=2.31.0
+tqdm>=4.66.0
